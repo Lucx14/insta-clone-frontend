@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import LikeButton from '../UI/Buttons/LikeButton';
+import FollowButton from '../UI/Buttons/FollowButton';
 import {
   Container,
   Img,
@@ -31,17 +33,17 @@ const PostCard = (props) => {
           <AvatarImg src={avatar} alt="av" />
           <div>{username}</div>
         </UserWrapper>
-        <button type="button" onClick={followClicked}>
+        <FollowButton clicked={followClicked}>
           {following ? 'Unfollow' : 'Follow'}
-        </button>
+        </FollowButton>
       </TopWrapper>
       <Img src={image} alt="text desc" />
       <BottomWrapper>
         <LikeWrapper>
           <div>
-            <button type="button" onClick={likeClicked}>
+            <LikeButton clicked={likeClicked}>
               {liked ? 'Unlike' : 'Like'}
-            </button>
+            </LikeButton>
           </div>
           <div>{likeCount} likes</div>
         </LikeWrapper>

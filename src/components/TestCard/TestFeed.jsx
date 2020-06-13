@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { getFeed as apiGetFeed } from '../../api/posts';
-import PostCard from '../PostCard/PostCard';
+import PostCard from '../PostCard';
 
 const Wrapper = styled.div`
   border: 1px solid red;

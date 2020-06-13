@@ -12,7 +12,7 @@ const TopWrapper = styled.div`
 `;
 
 const Img = styled.img`
-  width: 400px;
+  width: 373px;
   padding: 3px;
 
   @media screen and (max-width: 600px) {
@@ -23,6 +23,8 @@ const Img = styled.img`
 
 const AvatarImg = styled.img`
   border-radius: 50%;
+  width: 200px;
+  height: 200px;
 `;
 
 const Wrapper = styled.div`

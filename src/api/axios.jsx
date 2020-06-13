@@ -14,7 +14,7 @@ instance.interceptors.request.use((config) => {
   //   config.headers.Authorization = `Bearer ${jwt}`;
   // }
   const jwt =
-    'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2LCJleHAiOjE1OTE5OTgxMDR9.eRn-Naf4RS_L3LvNHlOO20c66Ret6RtbsgheryiqmN0';
+    'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2LCJleHAiOjE1OTIwOTMxMzF9.rEnJHeIc8y3Oe4k90pZToFZTToBW4l2TymKmD3nWepU';
   // eslint-disable-next-line no-param-reassign
   config.headers.Authorization = `Bearer ${jwt}`;
   return config;
