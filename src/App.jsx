@@ -9,6 +9,8 @@ import Footer from './hoc/Layout/Footer';
 import Test from './components/TestCard/Test';
 import TestFeed from './components/TestCard/TestFeed';
 import TestUser from './components/TestCard/TestUser';
+import Auth from './containers/Auth';
+import Signup from './containers/Signup';
 
 const Wrapper = styled.div`
   position: relative;
@@ -25,6 +27,8 @@ const ContentWrapper = styled.div`
 function App() {
   const routes = (
     <Switch>
+      <Route path="/auth" component={Auth} />
+      <Route path="/signup" component={Signup} />
       <Route path="/feed" component={TestFeed} />
       <Route path="/profile" component={TestUser} />
       <Route path="/" component={Test} />

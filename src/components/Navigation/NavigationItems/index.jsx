@@ -17,6 +17,12 @@ const NavigationItems = () => {
       <NavigationItem link="/profile" exact={false}>
         Logout
       </NavigationItem>
+      <NavigationItem link="/auth" exact={false}>
+        Auth
+      </NavigationItem>
+      <NavigationItem link="/signup" exact={false}>
+        Sign up
+      </NavigationItem>
     </Wrapper>
   );
 };
