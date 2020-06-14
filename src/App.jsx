@@ -1,16 +1,17 @@
 import React from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import './App.css';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 import Header from './hoc/Layout/Header';
 import Footer from './hoc/Layout/Footer';
-
 import Test from './components/TestCard/Test';
 import TestFeed from './components/TestCard/TestFeed';
 import TestUser from './components/TestCard/TestUser';
 import Auth from './containers/Auth';
 import Signup from './containers/Signup';
+import Logout from './containers/Logout';
 
 const Wrapper = styled.div`
   position: relative;
@@ -24,17 +25,28 @@ const ContentWrapper = styled.div`
   width: 90%;
 `;
 
-function App() {
-  const routes = (
+const App = (props) => {
+  const { isAuthenticated } = props;
+
+  let routes = (
     <Switch>
       <Route path="/auth" component={Auth} />
       <Route path="/signup" component={Signup} />
-      <Route path="/feed" component={TestFeed} />
-      <Route path="/profile" component={TestUser} />
-      <Route path="/" component={Test} />
-      <Redirect to="/" />
+      <Redirect to="/auth" />
     </Switch>
   );
+
+  if (isAuthenticated) {
+    routes = (
+      <Switch>
+        <Route path="/logout" component={Logout} />
+        <Route path="/feed" component={TestFeed} />
+        <Route path="/profile" component={TestUser} />
+        <Route path="/" component={Test} />
+        <Redirect to="/" />
+      </Switch>
+    );
+  }
 
   return (
     <Wrapper>
@@ -43,6 +55,14 @@ function App() {
       <Footer />
     </Wrapper>
   );
-}
+};
 
-export default withRouter(App);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.token !== null,
+});
+
+App.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+};
+
+export default withRouter(connect(mapStateToProps)(App));

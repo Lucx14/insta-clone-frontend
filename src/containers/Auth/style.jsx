@@ -43,3 +43,9 @@ export const Input = styled.input`
   border: ${(props) => (props.errors ? '1px solid #D6705C' : '1px solid #ccc')};
   background-color: ${(props) => (props.errors ? '#FFF8F7' : 'white')};
 `;
+
+export const StyledError = styled.div`
+  color: #808080;
+  padding: 5px;
+  font-style: italic;
+`;

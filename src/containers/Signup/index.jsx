@@ -1,10 +1,15 @@
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Button from '../../components/UI/Buttons/SubmitButton';
 import { Wrapper, StyledHelper, FieldWrapper, Input } from './style';
+import * as actions from '../../store/actions';
 
-const Signup = () => {
+const Signup = (props) => {
+  const { onAuthSignup } = props;
+
   return (
     <Wrapper>
       <Formik
@@ -30,7 +35,16 @@ const Signup = () => {
             .required('Required'),
           password_confirmation: Yup.string().required('Required'),
         })}
-        onSubmit={() => {}}
+        onSubmit={(values, { setSubmitting }) => {
+          onAuthSignup(
+            values.name,
+            values.username,
+            values.email,
+            values.password,
+            values.password_confirmation
+          );
+          setSubmitting(false);
+        }}
       >
         {({ errors, touched }) => {
           return (
@@ -112,4 +126,15 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+const mapDispatchToProps = (dispatch) => ({
+  onAuthSignup: (name, username, email, password, passwordConfirmation) =>
+    dispatch(
+      actions.authSignup(name, username, email, password, passwordConfirmation)
+    ),
+});
+
+Signup.propTypes = {
+  onAuthSignup: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Signup);

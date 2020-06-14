@@ -1,12 +1,40 @@
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import * as Yup from 'yup';
 import Button from '../../components/UI/Buttons/SubmitButton';
-import { Wrapper, StyledHelper, FieldWrapper, Input } from './style';
+import {
+  Wrapper,
+  StyledHelper,
+  FieldWrapper,
+  Input,
+  StyledError,
+} from './style';
+import * as actions from '../../store/actions';
 
-const Auth = () => {
+const Auth = (props) => {
+  const { onAuthInit, isAuthenticated, error } = props;
+
+  let authRedirect;
+  if (isAuthenticated) {
+    authRedirect = <Redirect to="/" />;
+  }
+
+  let errorMessage;
+  if (error) {
+    errorMessage = (
+      <StyledError>
+        There was a problem with your request, please try again
+      </StyledError>
+    );
+  }
+
   return (
     <Wrapper>
+      {authRedirect}
+      {errorMessage}
       <Formik
         initialValues={{
           email: '',
@@ -20,7 +48,10 @@ const Auth = () => {
             .min(6, 'Must be 6 characters or more')
             .required('Required'),
         })}
-        onSubmit={() => {}}
+        onSubmit={(values, { setSubmitting }) => {
+          onAuthInit(values.email, values.password);
+          setSubmitting(false);
+        }}
       >
         {({ errors, touched }) => {
           return (
@@ -58,4 +89,20 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+const mapStateToProps = (state) => ({
+  loading: state.auth.loading,
+  error: state.auth.error !== null,
+  isAuthenticated: state.auth.token !== null,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onAuthInit: (email, password) => dispatch(actions.authInit(email, password)),
+});
+
+Auth.propTypes = {
+  onAuthInit: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
