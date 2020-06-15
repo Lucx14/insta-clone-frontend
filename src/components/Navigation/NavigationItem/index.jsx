@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import NavigationItemProps from './propTypes';
 import { Wrapper } from './style';
 
 const NavigationItem = (props) => {
@@ -14,10 +14,6 @@ const NavigationItem = (props) => {
   );
 };
 
-NavigationItem.propTypes = {
-  link: PropTypes.string.isRequired,
-  exact: PropTypes.bool.isRequired,
-  children: PropTypes.node.isRequired,
-};
+NavigationItem.propTypes = NavigationItemProps;
 
 export default NavigationItem;

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import FollowButtonProps from './propTypes';
 import { StyledButton } from './style';
 
 const FollowButton = (props) => {
@@ -12,9 +12,6 @@ const FollowButton = (props) => {
   );
 };
 
-FollowButton.propTypes = {
-  children: PropTypes.node.isRequired,
-  clicked: PropTypes.func.isRequired,
-};
+FollowButton.propTypes = FollowButtonProps;
 
 export default FollowButton;

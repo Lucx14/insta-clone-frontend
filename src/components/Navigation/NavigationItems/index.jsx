@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
+import NavigationItemsProps from './propTypes';
 
 import NavigationItem from '../NavigationItem';
 import { Wrapper } from './style';
@@ -41,8 +41,6 @@ const NavigationItems = (props) => {
   );
 };
 
-NavigationItems.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-};
+NavigationItems.propTypes = NavigationItemsProps;
 
 export default NavigationItems;

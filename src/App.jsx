@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
-import Header from './hoc/Layout/Header';
-import Footer from './hoc/Layout/Footer';
+import Header from './containers/Header';
+import Footer from './components/Layout/Footer';
 import Test from './components/TestCard/Test';
 import TestFeed from './components/TestCard/TestFeed';
 import TestUser from './components/TestCard/TestUser';

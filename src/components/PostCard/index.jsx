@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PostCardProps from './propTypes';
 import LikeButton from '../UI/Buttons/LikeButton';
 import FollowButton from '../UI/Buttons/FollowButton';
 import {
@@ -56,16 +56,6 @@ const PostCard = (props) => {
   );
 };
 
-PostCard.propTypes = {
-  avatar: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-  followClicked: PropTypes.func.isRequired,
-  image: PropTypes.string.isRequired,
-  likeClicked: PropTypes.func.isRequired,
-  likeCount: PropTypes.number.isRequired,
-  caption: PropTypes.string.isRequired,
-  following: PropTypes.bool.isRequired,
-  liked: PropTypes.bool.isRequired,
-};
+PostCard.propTypes = PostCardProps;
 
 export default PostCard;
