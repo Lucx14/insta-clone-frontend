@@ -2,16 +2,39 @@ import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from '../../components/UI/Buttons/SubmitButton';
-import { Wrapper, StyledHelper, FieldWrapper, Input } from './style';
+import {
+  Wrapper,
+  StyledHelper,
+  FieldWrapper,
+  Input,
+  StyledError,
+} from './style';
 import * as actions from '../../store/actions';
 
 const Signup = (props) => {
-  const { onAuthSignup } = props;
+  const { onAuthSignup, isAuthenticated, error } = props;
+
+  let authRedirect;
+  if (isAuthenticated) {
+    authRedirect = <Redirect to="/" />;
+  }
+
+  let errorMessage;
+  if (error) {
+    errorMessage = (
+      <StyledError>
+        There was a problem with your request, please try again
+      </StyledError>
+    );
+  }
 
   return (
     <Wrapper>
+      {authRedirect}
+      {errorMessage}
       <Formik
         initialValues={{
           name: '',
@@ -33,7 +56,10 @@ const Signup = (props) => {
           password: Yup.string()
             .min(6, 'Must be 6 characters or more')
             .required('Required'),
-          password_confirmation: Yup.string().required('Required'),
+          password_confirmation: Yup.string().oneOf(
+            [Yup.ref('password'), null],
+            'Passwords must match'
+          ),
         })}
         onSubmit={(values, { setSubmitting }) => {
           onAuthSignup(
@@ -126,6 +152,12 @@ const Signup = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  loading: state.auth.loading,
+  error: state.auth.error !== null,
+  isAuthenticated: state.auth.token !== null,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   onAuthSignup: (name, username, email, password, passwordConfirmation) =>
     dispatch(
@@ -135,6 +167,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 Signup.propTypes = {
   onAuthSignup: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

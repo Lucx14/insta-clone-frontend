@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,6 +13,8 @@ import Auth from './containers/Auth';
 import Signup from './containers/Signup';
 import Logout from './containers/Logout';
 
+import * as actions from './store/actions';
+
 const Wrapper = styled.div`
   position: relative;
   min-height: 100vh;
@@ -26,7 +28,11 @@ const ContentWrapper = styled.div`
 `;
 
 const App = (props) => {
-  const { isAuthenticated } = props;
+  const { isAuthenticated, onTryAutoSignup } = props;
+
+  useEffect(() => {
+    onTryAutoSignup();
+  }, [onTryAutoSignup]);
 
   let routes = (
     <Switch>
@@ -42,7 +48,7 @@ const App = (props) => {
         <Route path="/logout" component={Logout} />
         <Route path="/feed" component={TestFeed} />
         <Route path="/profile" component={TestUser} />
-        <Route path="/" component={Test} />
+        <Route path="/" exact component={Test} />
         <Redirect to="/" />
       </Switch>
     );
@@ -61,8 +67,13 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.token !== null,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onTryAutoSignup: () => dispatch(actions.authCheckState()),
+});
+
 App.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
+  onTryAutoSignup: PropTypes.func.isRequired,
 };
 
-export default withRouter(connect(mapStateToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

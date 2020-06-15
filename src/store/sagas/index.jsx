@@ -6,6 +6,7 @@ import {
   logoutSaga,
   signUpSaga,
   checkAuthTimeoutSaga,
+  authCheckStateSaga,
 } from './auth';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -14,4 +15,5 @@ export function* watchAuth() {
   yield takeEvery(actionTypes.AUTH_INITIATE_LOGOUT, logoutSaga);
   yield takeEvery(actionTypes.AUTH_SIGNUP, signUpSaga);
   yield takeEvery(actionTypes.AUTH_CHECK_TIMEOUT, checkAuthTimeoutSaga);
+  yield takeEvery(actionTypes.AUTH_CHECK_STATE, authCheckStateSaga);
 }

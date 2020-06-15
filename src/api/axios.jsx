@@ -8,15 +8,11 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  // const jwt = localStorage.getItem('token');
-  // if (jwt) {
-  //   // eslint-disable-next-line no-param-reassign
-  //   config.headers.Authorization = `Bearer ${jwt}`;
-  // }
-  const jwt =
-    'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2LCJleHAiOjE1OTIxNTI4NjZ9.ScMJUdfVs0Tn226kRagjzhMIjzJPJANDJZgN262v2MI';
-  // eslint-disable-next-line no-param-reassign
-  config.headers.Authorization = `Bearer ${jwt}`;
+  const jwt = localStorage.getItem('token');
+  if (jwt) {
+    // eslint-disable-next-line no-param-reassign
+    config.headers.Authorization = `Bearer ${jwt}`;
+  }
   return config;
 });
 
