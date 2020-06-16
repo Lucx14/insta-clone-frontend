@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { getFeed as apiGetFeed } from '../../api/posts';
+import React, { useEffect } from 'react';
 import PostCard from '../PostCard';
 import { Wrapper, CardWrapper } from './style';
+import useFeed from '../../hooks/useFeed';
 
 const Feed = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, getFeed, recordLike] = useFeed();
 
   useEffect(() => {
-    apiGetFeed().then((res) => {
-      setPosts(res);
-    });
-  }, []);
+    getFeed();
+  }, [getFeed, recordLike]);
+
+  const likeClickHandler = (postId) => {
+    recordLike(postId);
+  };
 
   let allPosts;
   if (posts) {
@@ -22,7 +24,7 @@ const Feed = () => {
             username={post.author.username}
             followClicked={() => {}}
             image={post.image_url}
-            likeClicked={() => {}}
+            likeClicked={() => likeClickHandler(post.id)}
             likeCount={post.like_count}
             caption={post.caption}
             following={post.author.followed_by_current_user}

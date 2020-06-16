@@ -8,3 +8,7 @@ export async function getPosts() {
 export async function getFeed() {
   return axios.get('feed').then(getData);
 }
+
+export async function createLike(postId) {
+  return axios.post(`posts/${postId}/likes`).then(getData);
+}

@@ -26,7 +26,6 @@ const PostCard = (props) => {
     likeCount,
     caption,
     following,
-    liked,
   } = props;
 
   return (
@@ -46,9 +45,7 @@ const PostCard = (props) => {
       <BottomWrapper>
         <LikeWrapper>
           <div>
-            <LikeButton clicked={likeClicked}>
-              {liked ? 'Unlike' : 'Like'}
-            </LikeButton>
+            <LikeButton clicked={likeClicked}>Like</LikeButton>
           </div>
           <div>{likeCount} likes</div>
         </LikeWrapper>
