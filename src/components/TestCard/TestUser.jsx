@@ -54,8 +54,6 @@ const TestUser = () => {
     });
   }, []);
 
-  // console.log(user);
-
   let userPosts;
   if (user && user.posts) {
     userPosts = user.posts.map((post) => {

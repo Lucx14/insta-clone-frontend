@@ -1,21 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import { getFeed as apiGetFeed } from '../../api/posts';
 import PostCard from '../PostCard';
+import { Wrapper, CardWrapper } from './style';
 
-const Wrapper = styled.div`
-  border: 1px solid red;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-`;
-
-const CardWrapper = styled.div`
-  padding: 25px;
-`;
-
-// Proto feed = Posts#feed
-const TestFeed = () => {
+const Feed = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -23,8 +11,6 @@ const TestFeed = () => {
       setPosts(res);
     });
   }, []);
-
-  // console.log(posts);
 
   let allPosts;
   if (posts) {
@@ -50,4 +36,4 @@ const TestFeed = () => {
   return <Wrapper>{allPosts}</Wrapper>;
 };
 
-export default TestFeed;
+export default Feed;

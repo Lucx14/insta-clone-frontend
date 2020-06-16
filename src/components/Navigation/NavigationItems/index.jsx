@@ -14,10 +14,10 @@ const NavigationItems = (props) => {
       {isAuthenticated && (
         <>
           <NavigationItem link="/" exact={false}>
-            All
+            Home
           </NavigationItem>
-          <NavigationItem link="/feed" exact={false}>
-            Feed
+          <NavigationItem link="/search" exact={false}>
+            Search
           </NavigationItem>
           <NavigationItem link="/profile" exact={false}>
             Profile

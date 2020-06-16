@@ -6,7 +6,7 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
 import './index.css';
-import App from './App';
+import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import rootReducer from './store/reducers/index';
 import { watchAuth } from './store/sagas';
