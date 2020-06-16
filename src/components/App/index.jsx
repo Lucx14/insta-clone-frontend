@@ -32,7 +32,7 @@ const App = (props) => {
       <Switch>
         <Route path="/logout" component={Logout} />
         <Route path="/search" component={Test} />
-        <Route path="/profile" component={TestUser} />
+        <Route path="/profile/:username" component={TestUser} />
         <Route path="/" exact component={Feed} />
         <Redirect to="/" />
       </Switch>

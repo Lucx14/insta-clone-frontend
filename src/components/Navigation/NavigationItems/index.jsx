@@ -19,7 +19,7 @@ const NavigationItems = (props) => {
           <NavigationItem link="/search" exact={false}>
             Search
           </NavigationItem>
-          <NavigationItem link="/profile" exact={false}>
+          <NavigationItem link="/profile/luc" exact={false}>
             Profile
           </NavigationItem>
           <NavigationItem link="/logout" exact={false}>

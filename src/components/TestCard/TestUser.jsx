@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 import getUser from '../../api/users';
 
 const Container = styled.div`
@@ -47,12 +48,13 @@ const ImagesWrapper = styled.div`
 
 const TestUser = () => {
   const [user, setUser] = useState({});
+  const { username } = useParams();
 
   useEffect(() => {
-    getUser('kira').then((res) => {
+    getUser(username).then((res) => {
       setUser(res);
     });
-  }, []);
+  }, [username]);
 
   let userPosts;
   if (user && user.posts) {

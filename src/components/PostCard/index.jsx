@@ -1,5 +1,8 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+
 import PostCardProps from './propTypes';
+
 import LikeButton from '../UI/Buttons/LikeButton';
 import FollowButton from '../UI/Buttons/FollowButton';
 import {
@@ -31,7 +34,9 @@ const PostCard = (props) => {
       <TopWrapper>
         <UserWrapper>
           <AvatarImg src={avatar} alt="av" />
-          <div>{username}</div>
+          <NavLink to={`/profile/${username}`} exact>
+            {username}
+          </NavLink>
         </UserWrapper>
         <FollowButton clicked={followClicked}>
           {following ? 'Unfollow' : 'Follow'}
