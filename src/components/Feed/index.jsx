@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import PostCard from '../PostCard';
 import { Wrapper, CardWrapper } from './style';
-import { getPosts as apiGetPosts } from '../../api/posts';
 import { sortById } from '../../shared/utility';
+import useFeed from '../../hooks/useFeed';
 
 const Feed = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, getFeed, recordLike] = useFeed();
   const location = useLocation();
 
   useEffect(() => {
-    apiGetPosts().then((res) => {
-      setPosts(res);
-    });
-  }, []);
+    getFeed();
+  }, [getFeed]);
 
   let visiblePosts;
   if (posts && location.pathname === '/search') {
@@ -30,7 +28,7 @@ const Feed = () => {
               username={post.author.username}
               followClicked={() => {}}
               image={post.image_url}
-              likeClicked={() => {}}
+              likeClicked={() => recordLike(post.id)}
               likeCount={post.like_count}
               caption={post.caption}
               following={post.author.followed_by_current_user}
@@ -51,7 +49,7 @@ const Feed = () => {
               username={post.author.username}
               followClicked={() => {}}
               image={post.image_url}
-              likeClicked={() => {}}
+              likeClicked={() => recordLike(post.id)}
               likeCount={post.like_count}
               caption={post.caption}
               following={post.author.followed_by_current_user}
