@@ -6,12 +6,18 @@ import { sortById } from '../../shared/utility';
 import useFeed from '../../hooks/useFeed';
 
 const Feed = () => {
-  const [posts, getFeed, recordLike] = useFeed();
+  const [posts, getFeed, recordLike, followUser, unfollowUser] = useFeed();
   const location = useLocation();
 
   useEffect(() => {
     getFeed();
   }, [getFeed]);
+
+  const toggleFollow = (author) => {
+    return author.followed_by_current_user
+      ? unfollowUser(author.id)
+      : followUser(author.id);
+  };
 
   let visiblePosts;
   if (posts && location.pathname === '/search') {
@@ -26,13 +32,16 @@ const Feed = () => {
             <PostCard
               avatar={post.author.avatar}
               username={post.author.username}
-              followClicked={() => {}}
+              followClicked={() => toggleFollow(post.author)}
               image={post.image_url}
               likeClicked={() => recordLike(post.id)}
               likeCount={post.like_count}
               caption={post.caption}
               following={post.author.followed_by_current_user}
               liked={post.liked_by_current_user}
+              ownPost={
+                post.author.id === parseInt(localStorage.getItem('userId'), 10)
+              }
             />
           </CardWrapper>
         );
@@ -47,13 +56,16 @@ const Feed = () => {
             <PostCard
               avatar={post.author.avatar}
               username={post.author.username}
-              followClicked={() => {}}
+              followClicked={() => toggleFollow(post.author)}
               image={post.image_url}
               likeClicked={() => recordLike(post.id)}
               likeCount={post.like_count}
               caption={post.caption}
               following={post.author.followed_by_current_user}
               liked={post.liked_by_current_user}
+              ownPost={
+                post.author.id === parseInt(localStorage.getItem('userId'), 10)
+              }
             />
           </CardWrapper>
         );

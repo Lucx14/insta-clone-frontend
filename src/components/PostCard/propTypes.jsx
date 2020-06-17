@@ -10,6 +10,7 @@ const PostCardProps = {
   caption: PropTypes.string.isRequired,
   following: PropTypes.bool.isRequired,
   liked: PropTypes.bool.isRequired,
+  ownPost: PropTypes.bool.isRequired,
 };
 
 export default PostCardProps;

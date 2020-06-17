@@ -26,6 +26,7 @@ const PostCard = (props) => {
     likeCount,
     caption,
     following,
+    ownPost,
   } = props;
 
   return (
@@ -37,15 +38,17 @@ const PostCard = (props) => {
             {username}
           </NavLink>
         </UserWrapper>
-        <FollowButton clicked={followClicked}>
-          {following ? 'Unfollow' : 'Follow'}
-        </FollowButton>
+        {!ownPost && (
+          <FollowButton clicked={followClicked}>
+            {following ? 'Unfollow' : 'Follow'}
+          </FollowButton>
+        )}
       </TopWrapper>
       <Img src={image} alt="text desc" />
       <BottomWrapper>
         <LikeWrapper>
           <div>
-            <LikeButton clicked={likeClicked}>Like</LikeButton>
+            {!ownPost && <LikeButton clicked={likeClicked}>Like</LikeButton>}
           </div>
           <div>{likeCount} likes</div>
         </LikeWrapper>

@@ -3,6 +3,10 @@ import {
   createLike as apiCreateLike,
   getPosts as apiGetPosts,
 } from '../api/posts';
+import {
+  createFollow as apiCreateFollow,
+  deleteFollow as apiDeleteFollow,
+} from '../api/users';
 
 export default function useFeed() {
   const [posts, setPosts] = useState([]);
@@ -52,5 +56,67 @@ export default function useFeed() {
     [posts]
   );
 
-  return [posts, getFeed, recordLike, loading, error];
+  const followUser = useCallback(
+    (followedId) => {
+      setLoading(true);
+      apiCreateFollow(followedId)
+        .then(() => {
+          const updatedPosts = posts.map((post) => {
+            if (post.author.id === followedId) {
+              return {
+                ...post,
+                author: {
+                  ...post.author,
+                  followed_by_current_user: true,
+                },
+              };
+            }
+            return {
+              ...post,
+            };
+          });
+          setPosts(updatedPosts);
+          setLoading(false);
+          setError(false);
+        })
+        .catch(() => {
+          setLoading(false);
+          setError(true);
+        });
+    },
+    [posts]
+  );
+
+  const unfollowUser = useCallback(
+    (followedId) => {
+      setLoading(true);
+      apiDeleteFollow(followedId)
+        .then(() => {
+          const updatedPosts = posts.map((post) => {
+            if (post.author.id === followedId) {
+              return {
+                ...post,
+                author: {
+                  ...post.author,
+                  followed_by_current_user: false,
+                },
+              };
+            }
+            return {
+              ...post,
+            };
+          });
+          setPosts(updatedPosts);
+          setLoading(false);
+          setError(false);
+        })
+        .catch(() => {
+          setLoading(false);
+          setError(true);
+        });
+    },
+    [posts]
+  );
+
+  return [posts, getFeed, recordLike, followUser, unfollowUser, loading, error];
 }
