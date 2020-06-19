@@ -4,6 +4,7 @@ import {
   deleteFollow as apiDeleteFollow,
   getUser as apiGetUser,
 } from '../api/users';
+import { createPost as apiCreatePost } from '../api/posts';
 
 export default function useProfile() {
   const [user, setUser] = useState({});
@@ -70,5 +71,18 @@ export default function useProfile() {
     [user]
   );
 
-  return [user, getUser, followUser, unfollowUser, loading, error];
+  const newPost = useCallback((caption, formData) => {
+    setLoading(true);
+    apiCreatePost(caption, formData)
+      .then(() => {
+        setLoading(false);
+        setError(false);
+      })
+      .catch(() => {
+        setLoading(false);
+        setError(true);
+      });
+  }, []);
+
+  return [user, getUser, followUser, unfollowUser, newPost, loading, error];
 }

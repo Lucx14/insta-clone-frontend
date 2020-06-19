@@ -12,3 +12,7 @@ export async function getFeed() {
 export async function createLike(postId) {
   return axios.post(`posts/${postId}/likes`).then(getData);
 }
+
+export async function createPost(caption, formData) {
+  return axios.post(`posts?caption=${caption}`, formData).then(getData);
+}

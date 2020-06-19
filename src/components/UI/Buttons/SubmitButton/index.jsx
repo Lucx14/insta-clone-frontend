@@ -3,8 +3,12 @@ import ButtonProps from './propTypes';
 import { StyledButton } from './style';
 
 const Button = (props) => {
-  const { children } = props;
-  return <StyledButton type="submit">{children}</StyledButton>;
+  const { children, disabled } = props;
+  return (
+    <StyledButton type="submit" disabled={disabled}>
+      {children}
+    </StyledButton>
+  );
 };
 
 Button.propTypes = ButtonProps;
