@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import PostCardProps from './propTypes';
-
 import LikeButton from '../UI/Buttons/LikeButton';
 import FollowButton from '../UI/Buttons/FollowButton';
 import {
@@ -15,6 +14,7 @@ import {
   UserWrapper,
   LikeWrapper,
 } from './style';
+import { msToElapsedTime } from '../../shared/utility';
 
 const PostCard = (props) => {
   const {
@@ -27,6 +27,7 @@ const PostCard = (props) => {
     caption,
     following,
     ownPost,
+    timeStamp,
   } = props;
 
   return (
@@ -55,7 +56,7 @@ const PostCard = (props) => {
         <CaptionWrapper>
           {username}: {caption}
         </CaptionWrapper>
-        <p>1 hour ago</p>
+        <p>{msToElapsedTime(timeStamp)}</p>
       </BottomWrapper>
     </Container>
   );

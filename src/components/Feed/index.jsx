@@ -42,6 +42,7 @@ const Feed = () => {
               ownPost={
                 post.author.id === parseInt(localStorage.getItem('userId'), 10)
               }
+              timeStamp={post.created_at}
             />
           </CardWrapper>
         );
@@ -66,6 +67,7 @@ const Feed = () => {
               ownPost={
                 post.author.id === parseInt(localStorage.getItem('userId'), 10)
               }
+              timeStamp={post.created_at}
             />
           </CardWrapper>
         );

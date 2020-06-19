@@ -11,6 +11,7 @@ const PostCardProps = {
   following: PropTypes.bool.isRequired,
   liked: PropTypes.bool.isRequired,
   ownPost: PropTypes.bool.isRequired,
+  timeStamp: PropTypes.string.isRequired,
 };
 
 export default PostCardProps;
