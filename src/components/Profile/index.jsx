@@ -38,7 +38,7 @@ const Profile = () => {
 
   return (
     <Container>
-      <Backdrop show={false} />
+      <Backdrop show={false} clicked={() => {}} />
       <TopWrapper>
         <Wrapper>
           <AvatarImg src={user.avatar_url} alt="xxx" />

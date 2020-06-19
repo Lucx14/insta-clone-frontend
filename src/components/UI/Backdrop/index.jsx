@@ -3,9 +3,9 @@ import BackdropProps from './propTypes';
 import { Wrapper } from './style';
 
 const Backdrop = (props) => {
-  const { show } = props;
+  const { show, clicked } = props;
 
-  return <>{show ? <Wrapper /> : null}</>;
+  return <>{show ? <Wrapper onClick={clicked} /> : null}</>;
 };
 
 Backdrop.propTypes = BackdropProps;
