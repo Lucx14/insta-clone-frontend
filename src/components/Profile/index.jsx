@@ -9,6 +9,7 @@ import {
   ImagesWrapper,
 } from './style';
 import useProfile from '../../hooks/useProfile';
+import Backdrop from '../UI/Backdrop';
 
 const Profile = () => {
   const [user, getUser, followUser, unfollowUser] = useProfile();
@@ -37,6 +38,7 @@ const Profile = () => {
 
   return (
     <Container>
+      <Backdrop show={false} />
       <TopWrapper>
         <Wrapper>
           <AvatarImg src={user.avatar_url} alt="xxx" />
