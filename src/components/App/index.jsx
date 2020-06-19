@@ -6,7 +6,7 @@ import AppProps from './propTypes';
 import Header from '../../containers/Header';
 import Footer from '../Layout/Footer';
 import Feed from '../Feed';
-import TestUser from '../TestCard/TestUser';
+import Profile from '../Profile';
 import Auth from '../../containers/Auth';
 import Signup from '../../containers/Signup';
 import Logout from '../../containers/Logout';
@@ -31,7 +31,7 @@ const App = (props) => {
       <Switch>
         <Route path="/logout" component={Logout} />
         <Route path="/search" component={Feed} />
-        <Route path="/profile/:username" component={TestUser} />
+        <Route path="/profile/:username" component={Profile} />
         <Route path="/" exact component={Feed} />
         <Redirect to="/" />
       </Switch>
