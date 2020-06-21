@@ -24,3 +24,7 @@ export async function deleteFollow(followedId) {
     })
     .then(getData);
 }
+
+export async function updateAvatar(username, formData) {
+  return axios.put(`users/${username}/avatar`, formData).then(getData);
+}

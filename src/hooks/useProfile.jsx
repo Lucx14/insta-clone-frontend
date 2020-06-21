@@ -3,6 +3,7 @@ import {
   createFollow as apiCreateFollow,
   deleteFollow as apiDeleteFollow,
   getUser as apiGetUser,
+  updateAvatar as apiUpdateAvatar,
 } from '../api/users';
 import { createPost as apiCreatePost } from '../api/posts';
 
@@ -84,5 +85,27 @@ export default function useProfile() {
       });
   }, []);
 
-  return [user, getUser, followUser, unfollowUser, newPost, loading, error];
+  const changeAvatar = useCallback((username, formData) => {
+    setLoading(true);
+    apiUpdateAvatar(username, formData)
+      .then(() => {
+        setLoading(false);
+        setError(false);
+      })
+      .catch(() => {
+        setLoading(false);
+        setError(true);
+      });
+  }, []);
+
+  return [
+    user,
+    getUser,
+    followUser,
+    unfollowUser,
+    newPost,
+    changeAvatar,
+    loading,
+    error,
+  ];
 }

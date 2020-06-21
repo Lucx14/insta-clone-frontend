@@ -11,11 +11,20 @@ import {
 import useProfile from '../../hooks/useProfile';
 import Modal from '../UI/Modal';
 import ImageUploadForm from '../UI/ImageUploadForm';
+import AvatarForm from '../UI/AvatarForm';
 import { clearInputFile } from '../../shared/utility';
 
 const Profile = () => {
-  const [user, getUser, followUser, unfollowUser, newPost] = useProfile();
+  const [
+    user,
+    getUser,
+    followUser,
+    unfollowUser,
+    newPost,
+    changeAvatar,
+  ] = useProfile();
   const [posting, setPosting] = useState(false);
+  const [updatingAvatar, setUpdatingAvatar] = useState(false);
   const { username } = useParams();
   // const [postCount, setPostCount] = useState(0);
 
@@ -36,6 +45,10 @@ const Profile = () => {
     setPosting(true);
   };
 
+  const beginUpdateAvatar = () => {
+    setUpdatingAvatar(true);
+  };
+
   // const completePostHandler = () => {
   //   // console.log('FFFFFFFFFFF');
   //   setPostCount((prevState) => {
@@ -43,11 +56,16 @@ const Profile = () => {
   //   });
   // };
 
-  const cancelPostingHandler = () => {
+  const updateAvatar = (formData) => {
+    changeAvatar(username, formData);
+  };
+
+  const cancelActionHandler = () => {
     const es = document.forms[0].elements;
     clearInputFile(es[1]);
     es[0].value = '';
     setPosting(false);
+    setUpdatingAvatar(false);
   };
 
   let userPosts;
@@ -63,10 +81,20 @@ const Profile = () => {
 
   return (
     <Container>
-      <Modal show={posting} modalClosed={cancelPostingHandler}>
+      <Modal show={posting} modalClosed={cancelActionHandler}>
         <ImageUploadForm
           upload={newPost}
-          closeModal={cancelPostingHandler}
+          closeModal={cancelActionHandler}
+          complete={() => {}}
+        />
+      </Modal>
+      <Modal
+        show={updatingAvatar && !posting}
+        modalClosed={cancelActionHandler}
+      >
+        <AvatarForm
+          upload={updateAvatar}
+          closeModal={cancelActionHandler}
           complete={() => {}}
         />
       </Modal>
@@ -91,7 +119,9 @@ const Profile = () => {
             </button>
           )}
           {user.id === parseInt(localStorage.getItem('userId'), 10) && (
-            <button type="button">Edit Avatar</button>
+            <button type="button" onClick={beginUpdateAvatar}>
+              Edit Avatar
+            </button>
           )}
         </div>
       </TopWrapper>
