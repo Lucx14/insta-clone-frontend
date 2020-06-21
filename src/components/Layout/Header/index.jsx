@@ -4,13 +4,16 @@ import { Wrapper, Content } from './style';
 import NavigationItems from '../../Navigation/NavigationItems';
 
 const Header = (props) => {
-  const { isAuthenticated } = props;
+  const { isAuthenticated, username } = props;
 
   return (
     <Wrapper>
       <Content>
         <h1>Insta Clone</h1>
-        <NavigationItems isAuthenticated={isAuthenticated} />
+        <NavigationItems
+          isAuthenticated={isAuthenticated}
+          authenticatedUser={username}
+        />
       </Content>
     </Wrapper>
   );

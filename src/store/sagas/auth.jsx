@@ -19,6 +19,7 @@ export function* signUpSaga(action) {
     yield localStorage.setItem('token', response.auth_token);
     yield localStorage.setItem('tokenExpirationDate', tokenExpirationDate);
     yield localStorage.setItem('userId', response.user_id);
+    yield localStorage.setItem('username', response.username);
     yield put(
       actions.authSignupSuccess(response.auth_token, response.username)
     );
@@ -38,6 +39,7 @@ export function* signInSaga(action) {
     yield localStorage.setItem('token', response.auth_token);
     yield localStorage.setItem('tokenExpirationDate', tokenExpirationDate);
     yield localStorage.setItem('userId', response.user_id);
+    yield localStorage.setItem('username', response.username);
     yield put(actions.authSuccess(response.auth_token, response.username));
     yield put(actions.checkAuthTimeout(msToExp));
   } catch (err) {
@@ -49,11 +51,14 @@ export function* logoutSaga() {
   yield call([localStorage, 'removeItem'], 'token');
   yield call([localStorage, 'removeItem'], 'tokenExpirationDate');
   yield call([localStorage, 'removeItem'], 'userId');
+  yield call([localStorage, 'removeItem'], 'username');
+
   yield put(actions.logoutSuccess());
 }
 
 export function* authCheckStateSaga() {
   const token = yield localStorage.getItem('token');
+  const username = yield localStorage.getItem('username');
 
   if (!token) {
     yield put(actions.logOut());
@@ -64,7 +69,7 @@ export function* authCheckStateSaga() {
     if (expirationDate <= new Date()) {
       yield put(actions.logOut());
     } else {
-      yield put(actions.authSuccess(token));
+      yield put(actions.authSuccess(token, username));
       yield put(
         actions.checkAuthTimeout(
           expirationDate.getTime() - new Date().getTime()

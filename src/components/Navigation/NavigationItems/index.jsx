@@ -6,7 +6,7 @@ import NavigationItem from '../NavigationItem';
 import { Wrapper } from './style';
 
 const NavigationItems = (props) => {
-  const { isAuthenticated } = props;
+  const { isAuthenticated, authenticatedUser } = props;
   const location = useLocation();
 
   return (
@@ -19,7 +19,7 @@ const NavigationItems = (props) => {
           <NavigationItem link="/search" exact={false}>
             Search
           </NavigationItem>
-          <NavigationItem link="/profile/luc" exact={false}>
+          <NavigationItem link={`/profile/${authenticatedUser}`} exact={false}>
             Profile
           </NavigationItem>
           <NavigationItem link="/logout" exact={false}>
