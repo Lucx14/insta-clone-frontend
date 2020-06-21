@@ -10,9 +10,10 @@ export const authStart = () => ({
   type: actionTypes.AUTH_START,
 });
 
-export const authSuccess = (token) => ({
+export const authSuccess = (token, username) => ({
   type: actionTypes.AUTH_SUCCESS,
   token,
+  username,
 });
 
 export const authFail = (error) => ({
@@ -56,9 +57,10 @@ export const authSignupStart = () => ({
   type: actionTypes.AUTH_SIGNUP_START,
 });
 
-export const authSignupSuccess = (token) => ({
+export const authSignupSuccess = (token, username) => ({
   type: actionTypes.AUTH_SIGNUP_SUCCESS,
   token,
+  username,
 });
 
 export const authSignupFail = (error) => ({

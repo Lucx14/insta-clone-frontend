@@ -26,14 +26,10 @@ const Profile = () => {
   const [posting, setPosting] = useState(false);
   const [updatingAvatar, setUpdatingAvatar] = useState(false);
   const { username } = useParams();
-  // const [postCount, setPostCount] = useState(0);
 
   useEffect(() => {
     getUser(username);
   }, [getUser, username]);
-
-  // console.log(user);
-  // console.log(postCount);
 
   const toggleFollow = () => {
     return user.followed_by_current_user
@@ -49,15 +45,12 @@ const Profile = () => {
     setUpdatingAvatar(true);
   };
 
-  // const completePostHandler = () => {
-  //   // console.log('FFFFFFFFFFF');
-  //   setPostCount((prevState) => {
-  //     return prevState + 1;
-  //   });
-  // };
-
   const updateAvatar = (formData) => {
     changeAvatar(username, formData);
+  };
+
+  const createNewPost = (caption, formData) => {
+    newPost(username, caption, formData);
   };
 
   const cancelActionHandler = () => {
@@ -83,7 +76,7 @@ const Profile = () => {
     <Container>
       <Modal show={posting} modalClosed={cancelActionHandler}>
         <ImageUploadForm
-          upload={newPost}
+          upload={createNewPost}
           closeModal={cancelActionHandler}
           complete={() => {}}
         />
@@ -107,7 +100,7 @@ const Profile = () => {
             </button>
           )}
           <h2>{user.post_count} Posts</h2>
-          <h2>{user.follower_count} Followers</h2>
+          <h2>{user.follower_count - 1} Followers</h2>
           <h2>{user.followed_count} Following</h2>
         </Wrapper>
 

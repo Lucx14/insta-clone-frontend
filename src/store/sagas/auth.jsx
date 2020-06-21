@@ -19,7 +19,9 @@ export function* signUpSaga(action) {
     yield localStorage.setItem('token', response.auth_token);
     yield localStorage.setItem('tokenExpirationDate', tokenExpirationDate);
     yield localStorage.setItem('userId', response.user_id);
-    yield put(actions.authSignupSuccess(response.auth_token));
+    yield put(
+      actions.authSignupSuccess(response.auth_token, response.username)
+    );
     yield put(actions.checkAuthTimeout(msToExp));
   } catch (err) {
     yield put(actions.authSignupFail(err));
@@ -36,7 +38,7 @@ export function* signInSaga(action) {
     yield localStorage.setItem('token', response.auth_token);
     yield localStorage.setItem('tokenExpirationDate', tokenExpirationDate);
     yield localStorage.setItem('userId', response.user_id);
-    yield put(actions.authSuccess(response.auth_token));
+    yield put(actions.authSuccess(response.auth_token, response.username));
     yield put(actions.checkAuthTimeout(msToExp));
   } catch (err) {
     yield put(actions.authFail(err));

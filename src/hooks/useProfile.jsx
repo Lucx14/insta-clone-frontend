@@ -11,6 +11,7 @@ export default function useProfile() {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
+  const [postCount, setPostCount] = useState(0);
 
   const getUser = useCallback((username) => {
     setLoading(true);
@@ -72,31 +73,40 @@ export default function useProfile() {
     [user]
   );
 
-  const newPost = useCallback((caption, formData) => {
-    setLoading(true);
-    apiCreatePost(caption, formData)
-      .then(() => {
-        setLoading(false);
-        setError(false);
-      })
-      .catch(() => {
-        setLoading(false);
-        setError(true);
-      });
-  }, []);
+  const newPost = useCallback(
+    (username, caption, formData) => {
+      setLoading(true);
+      apiCreatePost(caption, formData)
+        .then(() => {
+          setLoading(false);
+          setError(false);
+          getUser(username);
+        })
+        .catch(() => {
+          setLoading(false);
+          setError(true);
+        });
+    },
+    [getUser]
+  );
 
-  const changeAvatar = useCallback((username, formData) => {
-    setLoading(true);
-    apiUpdateAvatar(username, formData)
-      .then(() => {
-        setLoading(false);
-        setError(false);
-      })
-      .catch(() => {
-        setLoading(false);
-        setError(true);
-      });
-  }, []);
+  const changeAvatar = useCallback(
+    (username, formData) => {
+      setLoading(true);
+      apiUpdateAvatar(username, formData)
+        .then(() => {
+          setLoading(false);
+          setError(false);
+          setPostCount((prevState) => prevState + 1);
+          getUser(username);
+        })
+        .catch(() => {
+          setLoading(false);
+          setError(true);
+        });
+    },
+    [getUser]
+  );
 
   return [
     user,
@@ -107,5 +117,6 @@ export default function useProfile() {
     changeAvatar,
     loading,
     error,
+    postCount,
   ];
 }
