@@ -17,6 +17,8 @@ import {
   StyledStatLabel,
   StyledDiv,
   FollowWrapper,
+  StyledDelete,
+  ImgWrapper,
 } from './style';
 import useProfile from '../../hooks/useProfile';
 import Modal from '../UI/Modal';
@@ -33,6 +35,7 @@ const Profile = () => {
     unfollowUser,
     newPost,
     changeAvatar,
+    removePost,
   ] = useProfile();
   const [posting, setPosting] = useState(false);
   const [updatingAvatar, setUpdatingAvatar] = useState(false);
@@ -72,13 +75,25 @@ const Profile = () => {
     setUpdatingAvatar(false);
   };
 
+  const handleImageDelete = (postId) => {
+    removePost(username, postId);
+  };
+
   let userPosts;
   if (user && user.posts) {
     userPosts = user.posts.map((post) => {
       return (
-        <div key={post.id}>
+        <ImgWrapper key={post.id}>
           <Img src={post.image_url} alt="uuu" />
-        </div>
+          {user.id === parseInt(localStorage.getItem('userId'), 10) && (
+            <StyledDelete
+              type="button"
+              onClick={() => handleImageDelete(post.id)}
+            >
+              x
+            </StyledDelete>
+          )}
+        </ImgWrapper>
       );
     });
   }

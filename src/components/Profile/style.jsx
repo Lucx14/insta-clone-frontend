@@ -156,3 +156,29 @@ export const FollowWrapper = styled.div`
     padding-bottom: 30px;
   }
 `;
+
+export const StyledDelete = styled.button`
+  position: absolute;
+  border: 1px solid #808080;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: #808080;
+  font-size: 1.2rem;
+  display: none;
+  outline: none;
+  z-index: 10;
+  right: 12px;
+  top: 12px;
+
+  :hover {
+    background: #fccfcf;
+  }
+`;
+
+export const ImgWrapper = styled.div`
+  position: relative;
+  &:hover ${StyledDelete} {
+    display: inline-block;
+  }
+`;

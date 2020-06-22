@@ -5,7 +5,10 @@ import {
   getUser as apiGetUser,
   updateAvatar as apiUpdateAvatar,
 } from '../api/users';
-import { createPost as apiCreatePost } from '../api/posts';
+import {
+  createPost as apiCreatePost,
+  deletePost as apiDeletePost,
+} from '../api/posts';
 
 export default function useProfile() {
   const [user, setUser] = useState({});
@@ -108,6 +111,24 @@ export default function useProfile() {
     [getUser]
   );
 
+  const removePost = useCallback(
+    (username, postId) => {
+      setLoading(true);
+      apiDeletePost(postId)
+        .then(() => {
+          setLoading(false);
+          setError(false);
+          setPostCount((prevState) => prevState - 1);
+          getUser(username);
+        })
+        .catch(() => {
+          setLoading(false);
+          setError(true);
+        });
+    },
+    [getUser]
+  );
+
   return [
     user,
     getUser,
@@ -115,6 +136,7 @@ export default function useProfile() {
     unfollowUser,
     newPost,
     changeAvatar,
+    removePost,
     loading,
     error,
     postCount,

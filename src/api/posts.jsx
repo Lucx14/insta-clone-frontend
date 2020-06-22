@@ -16,3 +16,7 @@ export async function createLike(postId) {
 export async function createPost(caption, formData) {
   return axios.post(`posts?caption=${caption}`, formData).then(getData);
 }
+
+export async function deletePost(postId) {
+  return axios.delete(`posts/${postId}`).then(getData);
+}
