@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderProps from './propTypes';
-import { Wrapper, Content } from './style';
+import { Wrapper, Content, TitleWrapper } from './style';
 import NavigationItems from '../../Navigation/NavigationItems';
 
 const Header = (props) => {
@@ -9,7 +9,7 @@ const Header = (props) => {
   return (
     <Wrapper>
       <Content>
-        <h1>Insta Clone</h1>
+        <TitleWrapper>Insta Clone</TitleWrapper>
         <NavigationItems
           isAuthenticated={isAuthenticated}
           authenticatedUser={username}

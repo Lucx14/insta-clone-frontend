@@ -1,24 +1,25 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  border: 1px solid black;
-  width: 100%;
+  max-width: 1220px;
+  padding: 2px;
+  margin: 0 auto;
 `;
 
 export const TopWrapper = styled.div`
   padding: 30px;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 900px) {
     width: 100%;
     padding: 30px 0;
   }
 `;
 
 export const Img = styled.img`
-  width: 373px;
+  width: 400px;
   padding: 3px;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 900px) {
     width: 100%;
     padding: 0px;
   }
@@ -37,7 +38,7 @@ export const Wrapper = styled.div`
   align-items: center;
   padding: 10px;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 900px) {
     flex-direction: column;
   }
 `;
@@ -101,7 +102,7 @@ export const StyledStatsWrapper = styled.div`
   color: #4d4d4d;
   display: flex;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 900px) {
     margin: 0;
     font-size: 0.8rem;
     align-items: center;
@@ -115,7 +116,7 @@ export const Stat = styled.div`
   padding: 0 30px;
   text-align: center;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 900px) {
     padding: 0 10px;
   }
 `;
@@ -141,7 +142,7 @@ export const StyledStatLabel = styled.div`
 export const StyledDiv = styled.div`
   display: flex;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 900px) {
     flex-direction: column;
     width: 100%;
     padding-top: 20px;
@@ -151,7 +152,7 @@ export const StyledDiv = styled.div`
 `;
 
 export const FollowWrapper = styled.div`
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 900px) {
     padding-bottom: 30px;
   }
 `;

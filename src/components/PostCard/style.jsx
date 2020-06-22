@@ -1,9 +1,16 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  border: 1px solid black;
   padding: 10px;
-  width: 340px;
+  max-width: 400px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+
+  @media screen and (min-width: 400px) {
+    -moz-box-shadow: 1px 1px 5px 1px #ccc;
+    -webkit-box-shadow: 1px 1px 5px 1px #ccc;
+    box-shadow: 1px 1px 5px 1px #ccc;
+  }
 `;
 
 export const Img = styled.img`
@@ -23,7 +30,6 @@ export const AvatarImg = styled.img`
 
 export const CaptionWrapper = styled.div`
   padding-top: 10px;
-  /* display: inline; */
 `;
 
 export const TopWrapper = styled.div`

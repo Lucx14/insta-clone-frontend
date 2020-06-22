@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  border: 1px solid red;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  max-width: 1000px;
+  margin: 0 auto;
 `;
 
 export const CardWrapper = styled.div`
-  padding: 25px;
+  padding: 2px;
 `;
