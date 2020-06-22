@@ -7,12 +7,22 @@ import {
   AvatarImg,
   Wrapper,
   ImagesWrapper,
+  NewPostButton,
+  AvatarWrapper,
+  StyledEditButton,
+  StyledStatsWrapper,
+  StyledNum,
+  Stat,
+  StyledUsername,
+  StyledStatLabel,
+  StyledDiv,
 } from './style';
 import useProfile from '../../hooks/useProfile';
 import Modal from '../UI/Modal';
 import ImageUploadForm from '../UI/ImageUploadForm';
 import AvatarForm from '../UI/AvatarForm';
 import { clearInputFile } from '../../shared/utility';
+import FollowButton from '../UI/Buttons/FollowButton';
 
 const Profile = () => {
   const [
@@ -93,30 +103,47 @@ const Profile = () => {
       </Modal>
       <TopWrapper>
         <Wrapper>
-          <AvatarImg src={user.avatar_url} alt="xxx" />
-          {user.id === parseInt(localStorage.getItem('userId'), 10) && (
-            <button type="button" onClick={beginPostinghandler}>
-              +
-            </button>
-          )}
-          <h2>{user.post_count} Posts</h2>
-          <h2>{user.follower_count - 1} Followers</h2>
-          <h2>{user.followed_count} Following</h2>
-        </Wrapper>
+          <AvatarWrapper>
+            <AvatarImg src={user.avatar_url} alt="xxx" />
+            {user.id === parseInt(localStorage.getItem('userId'), 10) && (
+              <NewPostButton type="button" onClick={beginPostinghandler}>
+                +
+              </NewPostButton>
+            )}
+            {user.id === parseInt(localStorage.getItem('userId'), 10) && (
+              <StyledEditButton type="button" onClick={beginUpdateAvatar}>
+                &#9998;
+              </StyledEditButton>
+            )}
+          </AvatarWrapper>
+          <div>
+            <StyledDiv>
+              <StyledUsername>{user.username}</StyledUsername>
+              {user.id !== parseInt(localStorage.getItem('userId'), 10) && (
+                <FollowButton clicked={toggleFollow}>
+                  {user.followed_by_current_user ? 'Unfollow' : 'Follow'}
+                </FollowButton>
+              )}
+            </StyledDiv>
 
-        <div>
-          <h2>{user.username}</h2>
-          {user.id !== parseInt(localStorage.getItem('userId'), 10) && (
-            <button type="button" onClick={toggleFollow}>
-              {user.followed_by_current_user ? 'Unfollow' : 'Follow'}
-            </button>
-          )}
-          {user.id === parseInt(localStorage.getItem('userId'), 10) && (
-            <button type="button" onClick={beginUpdateAvatar}>
-              Edit Avatar
-            </button>
-          )}
-        </div>
+            <StyledStatsWrapper>
+              <Stat>
+                <StyledNum>{user.post_count}</StyledNum>
+                <StyledStatLabel>Posts</StyledStatLabel>
+              </Stat>
+              <Stat>
+                <StyledNum>
+                  {user.follower_count ? user.follower_count - 1 : 0}
+                </StyledNum>
+                <StyledStatLabel>Followers</StyledStatLabel>
+              </Stat>
+              <Stat>
+                <StyledNum>{user.followed_count}</StyledNum>
+                <StyledStatLabel>Following</StyledStatLabel>{' '}
+              </Stat>
+            </StyledStatsWrapper>
+          </div>
+        </Wrapper>
       </TopWrapper>
       <ImagesWrapper>{userPosts}</ImagesWrapper>
     </Container>

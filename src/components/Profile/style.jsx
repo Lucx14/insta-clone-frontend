@@ -23,11 +23,11 @@ export const AvatarImg = styled.img`
   border-radius: 50%;
   width: 200px;
   height: 200px;
+  border: 1px solid #4d4d4d;
 `;
 
 export const Wrapper = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 10px;
 
@@ -38,7 +38,90 @@ export const Wrapper = styled.div`
 `;
 
 export const ImagesWrapper = styled.div`
-  margin-top: 40px;
+  margin-top: 3px;
   display: flex;
   flex-wrap: wrap;
+`;
+
+export const NewPostButton = styled.button`
+  border: none;
+  border-radius: 50%;
+  color: white;
+  background: #1fa1f1;
+  width: 40px;
+  height: 40px;
+  outline: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  font-weight: bold;
+  position: absolute;
+  right: -5px;
+  bottom: 30px;
+  border: 1px solid white;
+
+  :hover {
+    background: #1b91da;
+  }
+`;
+
+export const AvatarWrapper = styled.div`
+  position: relative;
+`;
+
+export const StyledEditButton = styled.button`
+  border: none;
+  border-radius: 50%;
+  color: white;
+  background: #1fa1f1;
+  width: 40px;
+  height: 40px;
+  outline: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  font-weight: bold;
+  position: absolute;
+  left: -5px;
+  bottom: 30px;
+  border: 1px solid white;
+
+  :hover {
+    background: #1b91da;
+  }
+`;
+
+export const StyledStatsWrapper = styled.div`
+  font-size: 1.7rem;
+  margin-left: 80px;
+  margin-top: 8px;
+  color: #4d4d4d;
+  display: flex;
+`;
+
+export const StyledStats = styled.div``;
+
+export const Stat = styled.div`
+  padding: 0 30px;
+  text-align: center;
+`;
+
+export const StyledUsername = styled.div`
+  font-size: 1.7rem;
+  color: #4d4d4d;
+  font-weight: bold;
+  padding-left: 30px;
+  margin-left: 80px;
+  padding-bottom: 30px;
+  padding-right: 100px;
+`;
+
+export const StyledNum = styled.div`
+  font-weight: bold;
+`;
+
+export const StyledStatLabel = styled.div`
+  font-weight: 300;
+`;
+
+export const StyledDiv = styled.div`
+  display: flex;
 `;
