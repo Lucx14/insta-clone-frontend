@@ -12,14 +12,18 @@ export const Img = styled.img`
 `;
 
 export const AvatarImg = styled.img`
-  border: 2px black solid;
+  border: 2px #4d4d4d solid;
+  padding: 2px;
   border-radius: 50%;
-  width: 30px;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
   margin-right: 10px;
 `;
 
 export const CaptionWrapper = styled.div`
   padding-top: 10px;
+  /* display: inline; */
 `;
 
 export const TopWrapper = styled.div`
@@ -45,4 +49,26 @@ export const LikeWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   padding-bottom: 10px;
+`;
+
+export const StyledUserLink = styled.div`
+  padding-left: 5px;
+  a {
+    text-decoration: none;
+    color: #4d4d4d;
+    font-size: 1.4rem;
+  }
+`;
+
+export const StyledTimestamp = styled.div`
+  color: #4d4d4d;
+  font-size: 0.8rem;
+  margin-top: 30px;
+`;
+
+export const StyledCaptionUsername = styled.div``;
+
+export const StyledCaptionText = styled.span`
+  color: #4d4d4d;
+  font-weight: lighter;
 `;

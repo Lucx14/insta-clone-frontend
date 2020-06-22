@@ -13,6 +13,10 @@ import {
   BottomWrapper,
   UserWrapper,
   LikeWrapper,
+  StyledUserLink,
+  StyledTimestamp,
+  StyledCaptionUsername,
+  StyledCaptionText,
 } from './style';
 import { msToElapsedTime } from '../../shared/utility';
 
@@ -35,9 +39,11 @@ const PostCard = (props) => {
       <TopWrapper>
         <UserWrapper>
           <AvatarImg src={avatar} alt="av" />
-          <NavLink to={`/profile/${username}`} exact>
-            {username}
-          </NavLink>
+          <StyledUserLink>
+            <NavLink to={`/profile/${username}`} exact>
+              {username}
+            </NavLink>
+          </StyledUserLink>
         </UserWrapper>
         {!ownPost && (
           <FollowButton clicked={followClicked}>
@@ -54,9 +60,11 @@ const PostCard = (props) => {
           <div>{likeCount} likes</div>
         </LikeWrapper>
         <CaptionWrapper>
-          {username}: {caption}
+          <StyledCaptionUsername>
+            {username}: <StyledCaptionText>{caption}</StyledCaptionText>
+          </StyledCaptionUsername>
         </CaptionWrapper>
-        <p>{msToElapsedTime(timeStamp)}</p>
+        <StyledTimestamp>{msToElapsedTime(timeStamp)}</StyledTimestamp>
       </BottomWrapper>
     </Container>
   );

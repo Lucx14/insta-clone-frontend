@@ -16,6 +16,7 @@ import {
   StyledUsername,
   StyledStatLabel,
   StyledDiv,
+  FollowWrapper,
 } from './style';
 import useProfile from '../../hooks/useProfile';
 import Modal from '../UI/Modal';
@@ -120,9 +121,11 @@ const Profile = () => {
             <StyledDiv>
               <StyledUsername>{user.username}</StyledUsername>
               {user.id !== parseInt(localStorage.getItem('userId'), 10) && (
-                <FollowButton clicked={toggleFollow}>
-                  {user.followed_by_current_user ? 'Unfollow' : 'Follow'}
-                </FollowButton>
+                <FollowWrapper>
+                  <FollowButton clicked={toggleFollow}>
+                    {user.followed_by_current_user ? 'Unfollow' : 'Follow'}
+                  </FollowButton>
+                </FollowWrapper>
               )}
             </StyledDiv>
 
